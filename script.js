@@ -8,7 +8,7 @@ const welkom = function(age){
 }
 
 const adult = function(age){
-    if (age >18) { return "Hello there"}
+    if (welkom(age)) { return "Hello there"}
     else{
         return "Hey kiddo"
     }
@@ -23,37 +23,32 @@ const test2 = adult(90)
 console.log(test2);
 
 
+const calculVat = function (basePrice, Vatperc){
+    return basePrice * ( Vatperc/100);
 
-const taxBerekening = function(basePrice, aantal){
-    const sum = basePrice * aantal;
-    return sum
 }
 
-const abc =taxBerekening(2,3)
-console.log(abc);
-
-
-const foodTax = function(basePrice, aantal) {
-    const sumTwo = taxBerekening() * 1.09;
-   console.log(sumTwo);
-    }
-
-foodTax(3,2)
-
-
-const goodiesTax = function(basePrice, aantal){
-    const sumThree = taxBerekening() * 1.21
-    console.log(sumThree);
+const calculPriceIncVat = function(basePrice, VatPerc){
+    const vat = calculVat(basePrice, VatPerc)
+    return vat + basePrice
 }
 
-goodiesTax(1,2)
+console.log(calculPriceIncVat(1000, 21));
 
 
+// ------
 
-const base= function(amount, perc){
-    const baseprix = amount / ( perc / 100)
+const calculBasePrice = function(priceIncVat, vatPercent){
+    const baseprix = priceIncVat / (( 100 + vatPercent) /100)
     return baseprix
-  
 }
-const teste = base(56/1.09)
-console.log(teste);
+
+
+const calcBasePriceAndVat = function (priceIncVat, vatPercent){
+    const baseprix = calculBasePrice(priceIncVat, vatPercent)
+    const VAT = priceIncVat - baseprix
+    return [baseprix, VAT ]
+}
+
+
+console.log(calcBasePriceAndVat(1210, 21));
